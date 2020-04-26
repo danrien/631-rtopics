@@ -176,7 +176,7 @@ plot_ci(lower, upper, mean(population))
 How many confidence intervals do not contain the true population mean?
 
 ```{r}
-sum(lower <= true_mean && true_mean <= upper)
+sum(true_mean < lower | true_mean > upper)
 ```
 
 # Question 5
@@ -241,10 +241,25 @@ plot_ci(lower, upper, mean(population))
 
 How many confidence intervals do not contain the true population mean now?
 
+```{r}
+ci_wihout_pop_mean <- sum(true_mean < lower | true_mean > upper)
+ci_wihout_pop_mean
+```
 
 # Question 8
 
 We can see that the small sample size statistically led to more intervals that did not contain the population mean. Use the t-distribution to find critical values and then re-run the simulation and see if it fixes the problem, i.e. fewer intervals that do not contain the population mean.
+
+```{r}
+df <- n -1
+t_star <- qt(.975, df)
+lower_t <- samp_mean - t_star * samp_sd/sqrt(n)
+upper_t <- samp_mean + t_star * samp_sd/sqrt(n)
+plot_ci(lower_t, upper_t, true_mean)
+
+t_ci_wihout_pop_mean <- sum(true_mean < lower_t | true_mean > upper_t)
+t_ci_wihout_pop_mean < ci_wihout_pop_mean
+```
 
 
 # Submission
