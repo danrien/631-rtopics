@@ -63,7 +63,7 @@ This is an important inference that we’ve just made: even though we don’t kn
 For the confidence interval to be valid, the sample mean must be normally distributed and have standard error s/sqrt(n). Which of the following is not a condition needed for this to be true?
 
 - (a) The sample is random.
-- (b) The sample size, 60, is less than 10% of all houses.
+- **(b) The sample size, 60, is less than 10% of all houses.**
 - (c) The sample distribution must be nearly normal.
 
 # Question 2
@@ -73,15 +73,19 @@ What does “95% confidence” mean?
 - (a) 95% of the time the true average area of houses in Ames, Iowa, will be in this interval.
 - (b) 95% of random samples of size 60 will yield confidence intervals that contain the true average area of houses in Ames, Iowa.
 - (c) 95% of the houses in Ames have an area in this interval.
-- (d) 95% confident that the sample mean is in this interval.
+- **(d) 95% confident that the sample mean is in this interval.**
 
 # Question 3
 
 Does your confidence interval capture the true average size of houses in Ames? I.e.,
 
 ```{r}
-mean(population)
+size_mean <- mean(population)
+
+lower <= size_mean && size_mean <= upper
 ```
+
+**Yes, the mean is within the confidence interval**
 
 # Testing the Theory
 
@@ -238,11 +242,7 @@ I'm trying a different format for the homework this time.  The goals are to make
 
 - Summary: imagine someone outside the class who doesn't know muhc or anything about statistics (like your mom, your child, a neice or nephew, etc.).  Explain to them the main idea of the homework or a specific part of it.
 
-<<<<<<< HEAD
 Make sure that your question, response, recommendation, or learning summary is on the topics in the homework, especially if you just do one post (if you do more than one post, feel free to take more leeway on the later posts).  On-topic subjects can include RMarkdown and GitHub as well as the theoretical topics.  Use the subject "hw5 <type>, <blurb>"  where <type> is "question", "response", "recommendation", or "summary" and <blurb> is a brief description.
-=======
-Make sure that your question, response, recommendation, or learning summary is on the topics in the homework, especially if you just do one post (if you do more than one post, feel free to take more leeway on the later posts).  Use the subject "hw5 <type>, <blurb>"  where <type> is "question", "response", "recommendation", or "summary" and <blurb> is a brief description.
->>>>>>> 645e68d4f146eb00f85d05082ccf53c9eb958c8b
 
 Submit the link(s) to the discussion post that you created or commented on.
 
