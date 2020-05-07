@@ -21,7 +21,7 @@ This Markdown file is part of a Git repository (repo) which is stored on GitHub.
 GitHub repos can be loaded ("cloned") as a project in RStudio, but we need to set up RStudio:
 
 * First [install git first](https://cfss.uchicago.edu/setup/git/).
-* Then [make sure that RStudio can use git](https://cfss.uchicago.edu/setup/git-with-rstudio/)
+* (this step is optional--come here to trouble shoot) [make sure that RStudio can use git](https://cfss.uchicago.edu/setup/git-with-rstudio/)
 * In RStudio go to File -> New Project ... -> Version Control -> Git
   * for repository url put "https://github.com/abecode/631-rtopics"
   * for project directory name put "clone-of-631-rtopics" (this you
@@ -36,6 +36,10 @@ Forking is a more advanced GitHub technique that will copy someone's repo to you
 * set up a [Github acccount](https://github.com) if you don't have one already.
 * go to https://github.com/abecode/631-rtopics
 * at the top right, select "Fork"" (after "Watch" and "Star")
+* Now, you can go back and use the "File -> New Project ... -> Version Control -> Git" command to substitute your forked repository
+  * if your username is me2020 the url would be https://github.com/me2020/631-rtopics
+  * for the directory name use "fork-of-631-rtopics"
+  * you can put it into the parent directory same as above
 
 This will create the repo in your own account. Now, if you modify it, you'll be able to upload/write/"push" the changes to made to your own account. To do this first you will change a file.  When a file is changed, you'll then see an "M" next to the file in the Git tab in the top right window of RStudio.  Check "Staged" and then click "Commit".  Then you will add a message to describe your commit.  Then you'll click "Push" and then the commit (a specific snapshot) will be uploaded to your copy of the repo. 
 

@@ -216,8 +216,8 @@ Go through each line of `plot_ci` and briefly describe what it does.  Use the li
 Depending on your data collection, it may be hard to get a sample of size 60. One issue we will have if we have smaller sample is that we will need to use the Student's t-distribution.  The sample standard deviation in particular is the calculation that will require the t-distribution because the t-distribution has "fatter tails" when the degrees-of-freedom parameter is low.  Let's say we have a sample of size 15.  If we want to find the critical values for 95\% confidence level using a 14 degrees-of-freedom t-distribution ($df=n-1$), we would use $t^*=2.14$ instead of $z^*=1.96$
 
 ```{r}
-qt(.025, 19)
-qt(.975, 19)
+qt(.025, 14)
+qt(.975, 14)
 ```
 
 To show this, let's rerun our earlier simulation with $n=15$ instead of $60$:
@@ -228,7 +228,7 @@ samp_sd <- rep(NA, 50)
 n <- 15
 set.seed(123)
 for(i in 1:50){
-   samp <- sample(population, n)  # obtain a sample of size n = 60 from the population
+   samp <- sample(population, n)  # obtain a sample of size n from the population
    samp_mean[i] <- mean(samp)     # save sample mean in ith element of samp_mean
    samp_sd[i] <- sd(samp)         # save sample sd in ith element of samp_sd
 }
@@ -262,6 +262,28 @@ t_ci_wihout_pop_mean < ci_wihout_pop_mean
 ```
 
 
+```{r}
+
+samp_mean <- rep(NA, 50)
+samp_sd <- rep(NA, 50)
+n <- 15
+set.seed(123)
+for(i in 1:50){
+samp <- sample(population, n)           # obtain a sample of size n = 15 from the population
+samp_mean[i] <- mean(samp)             # save sample mean in ith element of samp_mean
+samp_sd[i] <- sd(samp)                           # save sample sd in ith element of samp_sd
+}
+lower <- samp_mean - 2.14 * samp_sd/sqrt(n)
+upper <- samp_mean + 2.14 * samp_sd/sqrt(n)
+c(lower[1], upper[1])
+plot_ci(lower, upper, mean(population))
+
+```
+
+** It looks like 6 intervals don't include the population mean **
+
+
+
 # Submission
 
 I'm trying a different format for the homework this time.  The goals are to make you more familiar with RMarkdown, get a taste of GitHub, to learn from peers, and to get specific feedback more rapidly. To try to achieve this, the new format is to create one or more discussion posts related to the homework. The constraints of the post are as follows.  You should post at least once and your post should be categorized into one of the following categories:
@@ -272,7 +294,7 @@ I'm trying a different format for the homework this time.  The goals are to make
 
 - Recommendation: did you have an insight from the homework, find something useful in the book or on the web, or try some variation on the something in the homework?  Sharing this would be an example of a recommendation that you could post.
 
-- Summary: imagine someone outside the class who doesn't know muhc or anything about statistics (like your mom, your child, a neice or nephew, etc.).  Explain to them the main idea of the homework or a specific part of it.
+- Summary: imagine someone outside the class who doesn't know much or anything about statistics (like your mom, your child, a neice or nephew, etc.).  Explain to them the main idea of the homework or a specific part of it.
 
 Make sure that your question, response, recommendation, or learning summary is on the topics in the homework, especially if you just do one post (if you do more than one post, feel free to take more leeway on the later posts).  On-topic subjects can include RMarkdown and GitHub as well as the theoretical topics.  Use the subject "hw5 <type>, <blurb>"  where <type> is "question", "response", "recommendation", or "summary" and <blurb> is a brief description.
 
