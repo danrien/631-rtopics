@@ -92,6 +92,15 @@ One last piece of information we will discuss from the summary output is the Mul
 
 **Fit a new model that uses homeruns to predict runs. Using the estimates from the R output, write the equation of the regression line. What does the slope tell us in the context of the relationship between success of a team and its home runs?**
 
+```{r}
+homerun_model <- lm(runs ~ homeruns, data = mlb11)
+summary(homerun_model)
+```
+
+$$ \hat{y} = 415.2389 + 1.8345 \cdot homeruns $$
+
+**The least squares line tells us that the number of runs can be expected to increase on average by 1.8345 per homerun, while home runs explain 62.66% of the variability in the model.**
+
 #Prediction and prediction errors
 
 Let’s create a scatterplot with the least squares line laid on top.
@@ -106,6 +115,19 @@ The function abline plots a line based on its slope and intercept. Here, we used
 # Question 4
 
 **If a team manager saw the least squares regression line and not the actual data, how many runs would he or she predict for a team with 5,579 at-bats? Is this an overestimate or an underestimate, and by how much? In other words, what is the residual for this prediction?**
+
+```{r}
+atbats <- 5579
+estimated_runs_by_atbats <- -2789.2429 + 0.6305*atbats
+actual_runs_by_at_bats <- mlb11$runs[which(mlb11$at_bats == 5579)]
+
+residual <- actual_runs_by_at_bats - estimated_runs_by_atbats
+
+estimated_runs_by_atbats
+actual_runs_by_at_bats
+residual
+```
+
 
 # Model Diagnostics
 
@@ -122,6 +144,8 @@ abline(h = 0, lty = 3) # adds a horizontal dashed line at y = 0
 
 **Is there any apparent pattern in the residuals plot? What does this indicate about the linearity of the relationship between runs and at-bats?**
 
+**The residuals mostly cluster around the line, indicating a moderate correlation between at bats and number of runs**
+
 **Nearly Normal Residuals**: To check this condition, we can look at a histogram, `hist(m1$residuals)`, or a normal probability plot of the residuals.
 
 ```{r}
@@ -129,9 +153,15 @@ qqnorm(m1$residuals)
 qqline(m1$residuals) # adds diagonal line to the normal prob plot
 ```
 
+```{r}
+hist(m1$residuals)
+```
+
 # Question 6
 
 **Based on the histogram and the normal probability qq-plot, does the nearly normal residuals condition appear to be met?**
+
+**The residuals are roughly normal, and the fitted line is linear**
 
 **Constant Variability**:
 
@@ -139,6 +169,7 @@ qqline(m1$residuals) # adds diagonal line to the normal prob plot
 
 **Based on the plot in (1-linearity), does the constant variability condition appear to be met?**
 
+**Yes, the points are all around and 0 and the variability remains constant**
 
 # Submission
 
