@@ -7,6 +7,9 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library("ggplot2")
+library("gganimate")
+library("transformr")
 ```
 
 # Assignment 6: Linear Regression
@@ -108,6 +111,16 @@ Let’s create a scatterplot with the least squares line laid on top.
 ```{r}
 plot(mlb11$runs ~ mlb11$at_bats)
 abline(m1)
+
+p <- ggplot(mlb11, aes(sample = at_bats)) +  # Create QQplot with ggplot2 package
+  stat_qq() +
+  stat_qq_line(col = "red")
+
+p
+
+#p + transition_reveal(mlb11$at_bats)
+  p + 
+  transition_layers(1)
 ```
 
 The function abline plots a line based on its slope and intercept. Here, we used a shortcut by providing the model m1, which contains both parameter estimates. This line can be used to predict y at any value of x. When predictions are made for values of x that are beyond the range of the observed data, it is referred to as extrapolation and is not usually recommended. However, predictions made within the range of the data are more reliable. They’re also used to compute the residuals.
